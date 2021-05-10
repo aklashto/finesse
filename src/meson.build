@@ -1,0 +1,1 @@
+exe = executable('finesse', 'finesse.cc')
