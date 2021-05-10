@@ -1,1 +1,3 @@
-exe = executable('finesse', 'finesse.cc')
+exe = executable('finesse', ['finesse.cc', 'nes.cc'])
+
+install_headers(['nes.hh'])

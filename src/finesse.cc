@@ -1,4 +1,5 @@
 #include <iostream>
+#include "nes.hh"
 
 #define PROJECT_NAME "fiNESse"
 
