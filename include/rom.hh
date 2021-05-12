@@ -1,6 +1,8 @@
 #ifndef ROM_HH
 #define ROM_HH
 
+#include <cstdint>
+
 /**
  * Container class for the input ROM, which holds program and data for NES
  * games as well as metadata information about each game and their respective
