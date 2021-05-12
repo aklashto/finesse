@@ -1,3 +1,3 @@
-exe = executable('finesse', ['finesse.cc', 'nes.cc'])
-
-install_headers(['nes.hh'])
+main_source = files('finesse.cc')
+src += main_source
+src += files('nes.cc')

@@ -1,8 +1,6 @@
 #include <iostream>
 #include "nes.hh"
 
-#define PROJECT_NAME "fiNESse"
-
 inline bool ends_with(const std::string & input, const std::string & suffix) {
     size_t suffix_length = suffix.length();
     size_t input_length = input.length();
