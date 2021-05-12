@@ -16,5 +16,5 @@ To build and run, enter the following commands:
 ```
 meson build
 ninja -C build
-./build/src/finesse
+./build/src/finesse <filename>.nes
 ```
