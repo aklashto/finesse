@@ -27,19 +27,18 @@ finesse_bin = executable('finesse_bin',
   include_directories : inc,
   dependencies : deps)
 
-# This adds the clang format file to the build directory
+dirs_to_format = [src, tests, headers]
+
+# This adds the clang-format file to the build directory
 configure_file(input : '.clang-format',
                output : '.clang-format',
                copy: true)
 run_target('format',
-           command : ['clang-format','-i','-style=file', src, tests, headers])
+           command : ['clang-format','-i','-style=file', dirs_to_format])
 
-# This regex excludes any sources from the lib, tests, benchmarks
-# and catch2 related files.
-regex = '^((?!(tests|spdlog|catch2)).)*$'
-# This adds clang tidy support
+# This adds clang-tidy support
 configure_file(input : '.clang-tidy',
                output : '.clang-tidy',
                copy : true)
 run_target('tidy',
-           command : ['clang-tidy','-fix', src, tests, headers,'-format-style=file', '-p='+ meson.build_root()])
+           command : ['clang-tidy','-fix', dirs_to_format,'-format-style=file', '-p='+ meson.build_root()])
