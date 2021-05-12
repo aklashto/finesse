@@ -12,18 +12,20 @@ library_path = []
 src = []
 headers = []
 tests = []
+deps = []
 
 inc = [include_directories('include')]
+
+spdlog = subproject('spdlog')
+catch2 = subproject('catch2')
 
 subdir('include')
 subdir('src')
 
 finesse_bin = executable('finesse_bin',
   src,
-  include_directories : inc)
-
-spdlog = subproject('spdlog')
-gtest = subproject('catch2')
+  include_directories : inc,
+  dependencies : deps)
 
 # This adds the clang format file to the build directory
 configure_file(input : '.clang-format',
@@ -33,7 +35,7 @@ run_target('format',
            command : ['clang-format','-i','-style=file', src, tests, headers])
 
 # This regex excludes any sources from the lib, tests, benchmarks
-# and gtest related files.
+# and catch2 related files.
 regex = '^((?!(tests|spdlog|catch2)).)*$'
 # This adds clang tidy support
 configure_file(input : '.clang-tidy',
