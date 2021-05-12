@@ -9,7 +9,8 @@ The goal is to write a working NES emulator in C++.
 ## Build System
 
 This project uses the [meson](https://mesonbuild.com/) build system.
-See the [installation instructions](https://mesonbuild.com/SimpleStart.html) in the meson documentation.
+To install meson, see the [installation instructions](https://mesonbuild.com/SimpleStart.html) in the meson documentation.
+The meson configurations for the project are based on those in this [meson sample project](https://github.com/tiernemi/meson-sample-project) repo.
 
 To build and run, enter the following commands:
 
