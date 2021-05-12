@@ -42,4 +42,4 @@ configure_file(input : '.clang-tidy',
                output : '.clang-tidy',
                copy : true)
 run_target('tidy',
-           command : ['run-clang-tidy.py','-fix', '-j' , '8', 'files', regex ,'-format', '-p='+ meson.build_root()])
+           command : ['clang-tidy','-fix', src, tests, headers,'-format-style=file', '-p='+ meson.build_root()])
