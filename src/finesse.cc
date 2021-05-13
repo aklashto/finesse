@@ -1,3 +1,4 @@
+#include <gtkmm.h>
 #include <spdlog/spdlog.h>
 
 #include <iostream>
@@ -14,6 +15,7 @@ inline bool ends_with(const std::string &input, const std::string &suffix) {
 }
 
 int main(int argc, char **argv) {
+
   if (argc != 2) {
     spdlog::error("{} takes an input file as argument.", argv[0]);
     spdlog::error("  Usage: {} <filename>.nes", argv[0]);
@@ -35,6 +37,13 @@ int main(int argc, char **argv) {
 
   Nes nes;
   nes.ReadInputFile(infile);
+
+  auto app = Gtk::Application::create("org.gtkmm.examples.base");
+
+  Gtk::Window window;
+  window.set_default_size(200, 200);
+
+  return app->run(window);
 
   return 0;
 }

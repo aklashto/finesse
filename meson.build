@@ -16,13 +16,14 @@ deps = []
 
 inc = [include_directories('include')]
 
-spdlog = subproject('spdlog')
-catch2 = subproject('catch2')
+deps += dependency('catch2')
+deps += dependency('spdlog')
+deps += dependency('gtkmm-3.0')
 
 subdir('include')
 subdir('src')
 
-finesse_bin = executable('finesse_bin',
+finesse_bin = executable('finesse',
   src,
   include_directories : inc,
   dependencies : deps)
