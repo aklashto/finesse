@@ -15,7 +15,6 @@ inline bool ends_with(const std::string &input, const std::string &suffix) {
 }
 
 int main(int argc, char **argv) {
-
   if (argc != 2) {
     spdlog::error("{} takes an input file as argument.", argv[0]);
     spdlog::error("  Usage: {} <filename>.nes", argv[0]);
