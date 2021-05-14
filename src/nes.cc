@@ -14,8 +14,7 @@ bool Nes::ReadInputFile(std::ifstream& infile) {
   rom->header_.prg_size = 0;
   rom->header_.chr_size = 0;
 
-  // Get the first four bytes of the file and ensure that they correspond to
-  // "NES" followed by a SUB character in ASCII (0x4E 0x45 0x53 0x1A)
+  // Check and store the ROM header prefix
   char c;
   for (size_t i = 0; i < 4; ++i) {
     c = infile.get();
