@@ -11,7 +11,8 @@ class Nes {
  public:
   Nes();
   ~Nes();
-  void ReadInputFile(std::ifstream& infile);
+  // Returns whether read was successful
+  bool ReadInputFile(std::ifstream& infile);
 };
 
 #endif

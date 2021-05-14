@@ -15,6 +15,8 @@ class Rom {
   std::vector<uint8_t> prg_rom_data_;
   // CHR (character) ROM
   std::vector<uint8_t> chr_rom_data_;
+  // All ROMs start with "NES" followed by a SUB char
+  const std::vector<uint8_t> header_prefix_chars_{0x4E, 0x45, 0x53, 0x1A};
 
  public:
   Rom();
