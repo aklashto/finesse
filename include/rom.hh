@@ -28,6 +28,7 @@ class Rom {
     uint8_t prg_size;
     // in 8 KB units
     uint8_t chr_size;
+    std::vector<uint8_t> flags;
   };
 
   Header header_;

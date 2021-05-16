@@ -26,5 +26,9 @@ bool Nes::ReadInputFile(std::ifstream& infile) {
     rom->header_.prefix.emplace_back(c);
   }
 
+  rom->header_.prg_size = infile.get();
+  rom->header_.chr_size = infile.get();
+
+
   return true;
 }
