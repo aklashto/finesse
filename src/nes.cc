@@ -13,7 +13,7 @@ bool Nes::ReadInputFile(std::ifstream& infile) {
 
   // Check and store the ROM header prefix
   char c;
-  for (size_t i = 0; i < 4; ++i) {
+  for (size_t i = 0; i < rom->HeaderPrefixSize(); ++i) {
     c = infile.get();
     if (infile.eof()) {
       spdlog::error("Unexpected EOF detected in ROM");
@@ -23,12 +23,29 @@ bool Nes::ReadInputFile(std::ifstream& infile) {
       spdlog::error("Invalid prefix detected in ROM header");
       return false;
     }
-    rom->header_.prefix.emplace_back(c);
+    rom->GetHeader().prefix.emplace_back(c);
   }
 
-  rom->header_.prg_size = infile.get();
-  rom->header_.chr_size = infile.get();
+  // Get size of PRG and CHR ROM banks
+  rom->GetHeader().prg_size = infile.get();
+  rom->GetHeader().chr_size = infile.get();
 
+  // Get remaining flags from the file
+  for (size_t i = 0; i < rom->NumFlagsInHeader(); ++i) {
+    c = infile.get();
+    if (infile.eof()) {
+      spdlog::error("Unexpected EOF detected in ROM");
+      return false;
+    }
+    rom->GetHeader().flags.emplace_back(c);
+  }
+
+  // Advance cursor to end of header
+  infile.seekg(rom->UnusedHeaderBytes(), std::ios_base::cur);
+
+  rom->PrintHeader();
+
+  delete rom;
 
   return true;
 }
