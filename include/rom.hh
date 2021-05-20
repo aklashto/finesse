@@ -27,10 +27,11 @@ class Rom {
   enum MirroringDirection { Horizontal = 0, Vertical = 1, None };
 
  private:
+  Header header_;
   // Used for nametable mirroring, used by the PPU to lay out backgrounds
   MirroringDirection mirror_dir_;
   // Mapper code used for memory mapping cartridge hardware
-  uint8_t mapper;
+  uint8_t mapper_;
   // Trainer Data
   std::vector<uint8_t> trainer_data_;
   // PRG (program) ROM
@@ -45,12 +46,9 @@ class Rom {
   // Number of used flags in the header
   static constexpr size_t num_flags_in_header_ = 2;
 
-  Header header_;
-
  public:
-  Rom();
   Rom(Header& header, std::vector<uint8_t>& trainer_data,
-      std::vector<uint8_t>& prg_rom_data, std::vector<uint8_t>& chr_rom_data) {}
+      std::vector<uint8_t>& prg_rom_data, std::vector<uint8_t>& chr_rom_data);
   ~Rom();
 
   // Check that the given input header prefix matches the spec

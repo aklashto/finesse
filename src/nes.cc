@@ -9,55 +9,63 @@
 Nes::Nes() {}
 Nes::~Nes() {}
 bool Nes::ReadInputFile(std::ifstream& infile) {
-  Rom* rom = new Rom();
-
   // Check and store the ROM header prefix
   char c;
-  for (size_t i = 0; i < rom->HeaderPrefixSize(); ++i) {
+  Header header;
+  for (size_t i = 0; i < Rom::HeaderPrefixSize(); ++i) {
     c = infile.get();
     if (infile.eof()) {
       spdlog::error("Unexpected EOF detected in ROM");
       return false;
     }
-    if (!rom->CheckHeaderPrefix(c, i)) {
+    if (!Rom::CheckHeaderPrefix(c, i)) {
       spdlog::error("Invalid prefix detected in ROM header");
       return false;
     }
-    rom->GetHeader().prefix.emplace_back(c);
+    header.prefix.emplace_back(c);
   }
 
   // Get size of PRG and CHR ROM banks
-  rom->GetHeader().prg_size = infile.get();
-  rom->GetHeader().chr_size = infile.get();
+  header.prg_size = infile.get();
+  header.chr_size = infile.get();
 
   // Get remaining flags from the file
-  for (size_t i = 0; i < rom->NumFlagsInHeader(); ++i) {
+  for (size_t i = 0; i < Rom::NumFlagsInHeader(); ++i) {
     c = infile.get();
     if (infile.eof()) {
       spdlog::error("Unexpected EOF detected in ROM");
       return false;
     }
-    rom->GetHeader().flags.emplace_back(c);
+    header.flags.emplace_back(c);
   }
 
-  /**
-   * Flag 6
-   *   0: Mirroring
-   *   1: Cartridge contains battery-backed PRG RAM ($6000-7FFF) or other
-   *      persistent memory
-   *   2: 512-byte trainer at $7000-$71FF (stored before PRG data)
-   *   3: Ignore mirroring control or above mirroring bit; instead provide
-   *      four-screen VRAM 4-7: Mapper LSBs
-   *
-   * Flag 7
-   *   0: VS Unisystem
-   *   1: PlayChoice-10 (8KB of Hint Screen data stored after CHR data)
-   *   2-3: If equal to 2, flags 8-15 are in NES 2.0 format
-   *   4-7: Mapper MSBs
-   */
-
   // Advance cursor to end of header
-  infile.seekg(rom->UnusedHeaderBytes(), std::ios_base::cur);
+  infile.seekg(Rom::UnusedHeaderBytes(), std::ios_base::cur);
+
+  // Get trainer data
+  std::vector<uint8_t> trainer_data;
+  if (header.flags[0] >> 2 & 1) {
+    for (size_t i = 0; i < 512; ++i) {
+      c = infile.get();
+      trainer_data.emplace_back(c);
+    }
+  }
+
+  // Get prg rom data
+  std::vector<uint8_t> prg_rom_data;
+  for (size_t i = 0; i < 16384 * header.prg_size; ++i) {
+    c = infile.get();
+    prg_rom_data.emplace_back(c);
+  }
+
+  // Get chr rom data
+  std::vector<uint8_t> chr_rom_data;
+  for (size_t i = 0; i < 8192 * header.chr_size; ++i) {
+    c = infile.get();
+    chr_rom_data.emplace_back(c);
+  }
+
+  Rom* rom = new Rom(header, trainer_data, prg_rom_data, chr_rom_data);
 
   rom->PrintHeader();
 

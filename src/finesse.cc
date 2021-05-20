@@ -35,14 +35,18 @@ int main(int argc, char **argv) {
   }
 
   Nes nes;
-  nes.ReadInputFile(infile);
+  if (nes.ReadInputFile(infile)) {
+    return -4;
+  }
 
-  auto app = Gtk::Application::create("org.gtkmm.examples.base");
+  /*
+    auto app = Gtk::Application::create("org.gtkmm.examples.base");
 
-  Gtk::Window window;
-  window.set_default_size(200, 200);
+    Gtk::Window window;
+    window.set_default_size(200, 200);
 
-  return app->run(window);
+    return app->run(window);
+    */
 
   return 0;
 }
