@@ -1,6 +1,7 @@
 #ifndef ROM_HH
 #define ROM_HH
 
+#include <array>
 #include <cstdint>
 #include <vector>
 
@@ -22,32 +23,44 @@ struct Header {
  * mappers
  */
 class Rom {
+ public:
+  enum MirroringDirection { Horizontal = 0, Vertical = 1, None };
+
  private:
+  // Used for nametable mirroring, used by the PPU to lay out backgrounds
+  MirroringDirection mirror_dir_;
+  // Mapper code used for memory mapping cartridge hardware
+  uint8_t mapper;
+  // Trainer Data
+  std::vector<uint8_t> trainer_data_;
   // PRG (program) ROM
   std::vector<uint8_t> prg_rom_data_;
   // CHR (character) ROM
   std::vector<uint8_t> chr_rom_data_;
   // All ROMs start with "NES^Z"
-  const std::vector<uint8_t> header_prefix_chars_{0x4E, 0x45, 0x53, 0x1A};
+  static constexpr std::array<uint8_t, 4> header_prefix_chars_{0x4E, 0x45, 0x53,
+                                                               0x1A};
   // Size of header in bytes
-  const size_t header_size_ = 16;
+  static constexpr size_t header_size_ = 16;
   // Number of used flags in the header
-  const size_t num_flags_in_header_ = 2;
+  static constexpr size_t num_flags_in_header_ = 2;
 
   Header header_;
 
  public:
   Rom();
+  Rom(Header& header, std::vector<uint8_t>& trainer_data,
+      std::vector<uint8_t>& prg_rom_data, std::vector<uint8_t>& chr_rom_data) {}
   ~Rom();
 
   // Check that the given input header prefix matches the spec
-  bool CheckHeaderPrefix(char c, size_t pos);
-  size_t HeaderSize();
-  size_t HeaderPrefixSize();
+  static bool CheckHeaderPrefix(char c, size_t pos);
+  static size_t HeaderSize();
+  static size_t HeaderPrefixSize();
   // Returns the current number of flags implemented in the header
-  size_t NumFlagsInHeader();
+  static size_t NumFlagsInHeader();
   // Returns the number of remaining header bytes which should be skipped
-  size_t UnusedHeaderBytes();
+  static size_t UnusedHeaderBytes();
   Header& GetHeader();
   void PrintHeader();
 };
