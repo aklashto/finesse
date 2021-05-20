@@ -39,8 +39,29 @@ bool Nes::ReadInputFile(std::ifstream& infile) {
     header.flags.emplace_back(c);
   }
 
-  // Advance cursor to end of header
-  infile.seekg(Rom::UnusedHeaderBytes(), std::ios_base::cur);
+  // Extract version and associated mapper
+  Rom::Version version;
+  uint8_t mapper;
+  if ((header.flags[1] & 0xC) == 8) {
+    spdlog::error("NES 2.0 ROM format not yet supported");
+    return false;
+  } else if (!(header.flags[1] & 0xC)) {
+    spdlog::error("iNES 0.7 format not yet supported");
+    return false;
+  } else {
+    version = Rom::Version::Archaic;
+    mapper = header.flags[0] >> 4;
+    header.flags.resize(1);
+  }
+
+  // Extract mirroring direction
+  Rom::MirroringDirection mirror_dir;
+  if (header.flags[0] >> 3 & 1) {
+    mirror_dir = header.flags[0] & 1 ? Rom::MirroringDirection::Vertical
+                                     : Rom::MirroringDirection::Horizontal;
+  } else {
+    mirror_dir = Rom::MirroringDirection::None;
+  }
 
   // Get trainer data
   std::vector<uint8_t> trainer_data;
@@ -65,7 +86,8 @@ bool Nes::ReadInputFile(std::ifstream& infile) {
     chr_rom_data.emplace_back(c);
   }
 
-  Rom* rom = new Rom(header, trainer_data, prg_rom_data, chr_rom_data);
+  Rom* rom = new Rom(header, mirror_dir, version, mapper, trainer_data,
+                     prg_rom_data, chr_rom_data);
 
   rom->PrintHeader();
 
