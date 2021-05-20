@@ -45,9 +45,12 @@ bool Nes::ReadInputFile(std::ifstream& infile) {
   if ((header.flags[1] & 0xC) == 8) {
     spdlog::error("NES 2.0 ROM format not yet supported");
     return false;
-  } else if (!(header.flags[1] & 0xC)) {
-    spdlog::error("iNES 0.7 format not yet supported");
-    return false;
+  } else if (!(header.flags[1] & 0xC) &&
+             std::all_of(header.flags.cbegin() + 6, header.flags.cend(),
+                         [](uint8_t flag) { return flag == 0; })) {
+    version = Rom::Version::iNes;
+    mapper = (header.flags[0] >> 4) | ((header.flags[1] << 4) >> 4);
+    header.flags.resize(4);
   } else {
     version = Rom::Version::Archaic;
     mapper = header.flags[0] >> 4;
