@@ -1,14 +1,14 @@
 #ifndef CPU_HH
 #define CPU_HH
 
-#include "memory.hh"
+#include "cpu_memory.hh"
 
 /**
  * The NES CPU
  */
 class Cpu {
  private:
-  Memory* memory_;
+  CpuMemory* memory_;
   uint32_t pc_;
 
  public:
