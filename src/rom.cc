@@ -39,8 +39,8 @@ void Rom::PrintHeader() {
   }
 
   spdlog::info("Prefix: {0}", s);
-  spdlog::info("PRG: {0} bytes", header_.prg_size);
-  spdlog::info("CHR: {0} bytes", header_.chr_size);
+  spdlog::info("PRG: {0} Kbytes", header_.prg_size * 16);
+  spdlog::info("CHR: {0} Kbytes", header_.chr_size * 8);
 
   for (size_t i = 0; i < header_.flags.size(); ++i) {
     spdlog::info("Flag {0}: {1:8b}", i, header_.flags[i]);
