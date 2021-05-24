@@ -1,8 +1,6 @@
 #ifndef NES_HH
 #define NES_HH
 
-#include <fstream>
-
 #include "cpu.hh"
 
 /**
@@ -16,8 +14,6 @@ class Nes {
  public:
   Nes();
   ~Nes();
-  // Returns whether read was successful
-  bool ReadInputFile(std::ifstream& infile);
 };
 
 #endif

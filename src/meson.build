@@ -1,6 +1,6 @@
 main_source = files('finesse.cc')
 src += main_source
 
-src_files = ['nes.cc', 'rom.cc', 'cpu_memory.cc']
+src_files = ['nes.cc', 'rom.cc', 'cpu_memory.cc', 'cpu.cc']
 
 src += files(src_files)

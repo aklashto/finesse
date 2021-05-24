@@ -12,9 +12,9 @@ Rom::Rom(Header& header, MirroringDirection mirror_dir, Version version,
       mirror_dir_(mirror_dir),
       version_(version),
       mapper_(mapper),
-      trainer_data_(trainer_data),
-      prg_rom_data_(prg_rom_data),
-      chr_rom_data_(chr_rom_data) {}
+      trainer_data_(&trainer_data),
+      prg_rom_data_(&prg_rom_data),
+      chr_rom_data_(&chr_rom_data) {}
 
 Rom::~Rom() {}
 
