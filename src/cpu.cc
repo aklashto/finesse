@@ -8,3 +8,5 @@ Cpu::Cpu(CpuMemory* memory)
       reg_index_y_(0) {
   reg_status_.reset();
 }
+
+Cpu::~Cpu() { delete memory_; }

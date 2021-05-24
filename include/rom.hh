@@ -60,6 +60,9 @@ class Rom {
   static size_t HeaderPrefixSize();
   static size_t NumFlagsInHeader();
   void PrintHeader();
+  const std::vector<uint8_t>* GetPrgRom();
+  const std::vector<uint8_t>* GetChrRom();
+  const std::vector<uint8_t>* GetTrainer();
 };
 
 #endif

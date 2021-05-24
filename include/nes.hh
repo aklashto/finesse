@@ -2,6 +2,7 @@
 #define NES_HH
 
 #include "cpu.hh"
+#include "rom.hh"
 
 /**
  * The top-level of the emulated NES console. To start, this will just be the
@@ -12,7 +13,7 @@ class Nes {
   Cpu* cpu_;
 
  public:
-  Nes();
+  Nes(Rom* rom);
   ~Nes();
 };
 

@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 
+#include "nes.hh"
 #include "rom.hh"
 
 inline bool ends_with(const std::string& input, const std::string& suffix) {
@@ -137,6 +138,10 @@ int main(int argc, char** argv) {
 
     return app->run(window);
     */
+
+  Nes* nes = new Nes(rom);
+
+  delete rom;
 
   return 0;
 }

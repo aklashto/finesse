@@ -4,6 +4,9 @@
 
 #include <iostream>
 
-Nes::Nes() {}
+Nes::Nes(Rom* rom) {
+  CpuMemory* mem = new CpuMemory(rom->GetPrgRom());
+  cpu_ = new Cpu(mem);
+}
 
-Nes::~Nes() {}
+Nes::~Nes() { delete cpu_; }

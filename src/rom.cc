@@ -50,3 +50,9 @@ void Rom::PrintHeader() {
 
   spdlog::info("=================");
 }
+
+const std::vector<uint8_t>* Rom::GetPrgRom() { return prg_rom_data_; }
+
+const std::vector<uint8_t>* Rom::GetChrRom() { return chr_rom_data_; }
+
+const std::vector<uint8_t>* Rom::GetTrainer() { return trainer_data_; }
