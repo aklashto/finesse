@@ -141,6 +141,7 @@ int main(int argc, char** argv) {
 
   Nes* nes = new Nes(rom);
 
+  delete nes;
   delete rom;
 
   return 0;
