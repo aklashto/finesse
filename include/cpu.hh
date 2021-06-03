@@ -39,7 +39,7 @@ class Cpu {
     IndexedIndirectX,  // (d,x)
     IndexedIndirectY,  // (d),y
     Accumulator,       // A
-    Immediate,         // #v
+    Immediate,         // #i
     ZeroPage,          // d
     Absolute,          // a
     Relative,          // label
