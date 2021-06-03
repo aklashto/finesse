@@ -1,6 +1,8 @@
 #ifndef CPU_HH
 #define CPU_HH
 
+#include <spdlog/spdlog.h>
+
 #include <bitset>
 #include <cstdint>
 
@@ -30,93 +32,98 @@ class Cpu {
   };
 
   enum AddressingMode {
-    ZeroPageX,
-    ZeroPageY,
-    AbsoluteX,
-    AbsoluteY,
-    IndirectX,
-    IndirectY
+    IndexedZeroPageX,  // d,x
+    IndexedZeroPageY,  // d,y
+    IndexedAbsoluteX,  // a,x
+    IndexedAbsoluteY,  // a,y
+    IndexedIndirectX,  // (d,x)
+    IndexedIndirectY,  // (d),y
+    Accumulator,       // A
+    Immediate,         // #v
+    ZeroPage,          // d
+    Absolute,          // a
+    Relative,          // label
+    Indirect,          // (a)
+    Implicit           //
   };
 
-  void ADC() {}
-  void AHX() {}
-  void ALR() {}
-  void ANC() {}
-  void AND() {}
-  void ARR() {}
-  void ASL() {}
-  void AXS() {}
-  void BCC() {}
-  void BCS() {}
-  void BEQ() {}
-  void BIT() {}
-  void BMI() {}
-  void BNE() {}
-  void BPL() {}
-  void BRK() {}
-  void BVC() {}
-  void BVS() {}
-  void CLC() {}
-  void CLD() {}
-  void CLI() {}
-  void CLV() {}
-  void CMP() {}
-  void CPX() {}
-  void CPY() {}
-  void DCP() {}
-  void DEC() {}
-  void DEX() {}
-  void DEY() {}
-  void EOR() {}
-  void INC() {}
-  void INX() {}
-  void INY() {}
-  void ISC() {}
-  void JMP() {}
-  void JSR() {}
-  void LAS() {}
-  void LAX() {}
-  void LDA() {}
-  void LDX() {}
-  void LDY() {}
-  void LSR() {}
-  void NOP() {}
-  void ORA() {}
-  void PHA() {}
-  void PHP() {}
-  void PLA() {}
-  void PLP() {}
-  void RLA() {}
-  void ROL() {}
-  void ROR() {}
-  void RRA() {}
-  void RTI() {}
-  void RTS() {}
-  void SAX() {}
-  void SBC() {}
-  void SEC() {}
-  void SED() {}
-  void SEI() {}
-  void SHX() {}
-  void SHY() {}
-  void SLO() {}
-  void SRE() {}
-  void STA() {}
-  void STP() {}
-  void STX() {}
-  void STY() {}
-  void TAS() {}
-  void TAX() {}
-  void TAY() {}
-  void TSX() {}
-  void TXA() {}
-  void TXS() {}
-  void TYA() {}
-  void XAA() {}
+  void ADC(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void AHX(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void ALR(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void ANC(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void AND(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void ARR(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void ASL(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void AXS(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void BCC(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void BCS(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void BEQ(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void BIT(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void BMI(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void BNE(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void BPL(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void BRK(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void BVC(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void BVS(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void CLC(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void CLD(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void CLI(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void CLV(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void CMP(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void CPX(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void CPY(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void DCP(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void DEC(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void DEX(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void DEY(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void EOR(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void INC(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void INX(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void INY(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void ISC(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void JMP(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void JSR(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void LAS(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void LAX(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void LDA(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void LDX(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void LDY(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void LSR(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void NOP(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void ORA(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void PHA(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void PHP(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void PLA(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void PLP(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void RLA(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void ROL(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void ROR(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void RRA(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void RTI(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void RTS(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void SAX(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void SBC(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void SEC(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void SED(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void SEI(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void SHX(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void SHY(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void SLO(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void SRE(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void STA(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void STP(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void STX(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void STY(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void TAS(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void TAX(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void TAY(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void TSX(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void TXA(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void TXS(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void TYA(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
+  void XAA(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
 
   void Exec(uint8_t opcode);
-
-  std::array<AddressingMode, 256> addr_mode_map_;
 
  public:
   Cpu(CpuMemory* memory);

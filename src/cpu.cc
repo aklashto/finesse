@@ -8,773 +8,261 @@ Cpu::~Cpu() { delete memory_; }
 
 void Cpu::Exec(uint8_t opcode) {
   switch (opcode) {
-    case 0:
-      Cpu::BRK();
-      break;
-    case 1:
-      Cpu::ORA();
-      break;
-    case 2:
-      Cpu::STP();
-      break;
-    case 3:
-      Cpu::SLO();
-      break;
-    case 4:
-      Cpu::NOP();
-      break;
-    case 5:
-      Cpu::ORA();
-      break;
-    case 6:
-      Cpu::ASL();
-      break;
-    case 7:
-      Cpu::SLO();
-      break;
-    case 8:
-      Cpu::PHP();
-      break;
-    case 9:
-      Cpu::ORA();
-      break;
-    case 10:
-      Cpu::ASL();
-      break;
-    case 11:
-      Cpu::ANC();
-      break;
-    case 12:
-      Cpu::NOP();
-      break;
-    case 13:
-      Cpu::ORA();
-      break;
-    case 14:
-      Cpu::ASL();
-      break;
-    case 15:
-      Cpu::SLO();
-      break;
-    case 16:
-      Cpu::BPL();
-      break;
-    case 17:
-      Cpu::ORA();
-      break;
-    case 18:
-      Cpu::STP();
-      break;
-    case 19:
-      Cpu::SLO();
-      break;
-    case 20:
-      Cpu::NOP();
-      break;
-    case 21:
-      Cpu::ORA();
-      break;
-    case 22:
-      Cpu::ASL();
-      break;
-    case 23:
-      Cpu::SLO();
-      break;
-    case 24:
-      Cpu::CLC();
-      break;
-    case 25:
-      Cpu::ORA();
-      break;
-    case 26:
-      Cpu::NOP();
-      break;
-    case 27:
-      Cpu::SLO();
-      break;
-    case 28:
-      Cpu::NOP();
-      break;
-    case 29:
-      Cpu::ORA();
-      break;
-    case 30:
-      Cpu::ASL();
-      break;
-    case 31:
-      Cpu::SLO();
-      break;
-    case 32:
-      Cpu::JSR();
-      break;
-    case 33:
-      Cpu::AND();
-      break;
-    case 34:
-      Cpu::STP();
-      break;
-    case 35:
-      Cpu::RLA();
-      break;
-    case 36:
-      Cpu::BIT();
-      break;
-    case 37:
-      Cpu::AND();
-      break;
-    case 38:
-      Cpu::ROL();
-      break;
-    case 39:
-      Cpu::RLA();
-      break;
-    case 40:
-      Cpu::PLP();
-      break;
-    case 41:
-      Cpu::AND();
-      break;
-    case 42:
-      Cpu::ROL();
-      break;
-    case 43:
-      Cpu::ANC();
-      break;
-    case 44:
-      Cpu::BIT();
-      break;
-    case 45:
-      Cpu::AND();
-      break;
-    case 46:
-      Cpu::ROL();
-      break;
-    case 47:
-      Cpu::RLA();
-      break;
-    case 48:
-      Cpu::BMI();
-      break;
-    case 49:
-      Cpu::AND();
-      break;
-    case 50:
-      Cpu::STP();
-      break;
-    case 51:
-      Cpu::RLA();
-      break;
-    case 52:
-      Cpu::NOP();
-      break;
-    case 53:
-      Cpu::AND();
-      break;
-    case 54:
-      Cpu::ROL();
-      break;
-    case 55:
-      Cpu::RLA();
-      break;
-    case 56:
-      Cpu::SEC();
-      break;
-    case 57:
-      Cpu::AND();
-      break;
-    case 58:
-      Cpu::NOP();
-      break;
-    case 59:
-      Cpu::RLA();
-      break;
-    case 60:
-      Cpu::NOP();
-      break;
-    case 61:
-      Cpu::AND();
-      break;
-    case 62:
-      Cpu::ROL();
-      break;
-    case 63:
-      Cpu::RLA();
-      break;
-    case 64:
-      Cpu::RTI();
-      break;
-    case 65:
-      Cpu::EOR();
-      break;
-    case 66:
-      Cpu::STP();
-      break;
-    case 67:
-      Cpu::SRE();
-      break;
-    case 68:
-      Cpu::NOP();
-      break;
-    case 69:
-      Cpu::EOR();
-      break;
-    case 70:
-      Cpu::LSR();
-      break;
-    case 71:
-      Cpu::SRE();
-      break;
-    case 72:
-      Cpu::PHA();
-      break;
-    case 73:
-      Cpu::EOR();
-      break;
-    case 74:
-      Cpu::LSR();
-      break;
-    case 75:
-      Cpu::ALR();
-      break;
-    case 76:
-      Cpu::JMP();
-      break;
-    case 77:
-      Cpu::EOR();
-      break;
-    case 78:
-      Cpu::LSR();
-      break;
-    case 79:
-      Cpu::SRE();
-      break;
-    case 80:
-      Cpu::BVC();
-      break;
-    case 81:
-      Cpu::EOR();
-      break;
-    case 82:
-      Cpu::STP();
-      break;
-    case 83:
-      Cpu::SRE();
-      break;
-    case 84:
-      Cpu::NOP();
-      break;
-    case 85:
-      Cpu::EOR();
-      break;
-    case 86:
-      Cpu::LSR();
-      break;
-    case 87:
-      Cpu::SRE();
-      break;
-    case 88:
-      Cpu::CLI();
-      break;
-    case 89:
-      Cpu::EOR();
-      break;
-    case 90:
-      Cpu::NOP();
-      break;
-    case 91:
-      Cpu::SRE();
-      break;
-    case 92:
-      Cpu::NOP();
-      break;
-    case 93:
-      Cpu::EOR();
-      break;
-    case 94:
-      Cpu::LSR();
-      break;
-    case 95:
-      Cpu::SRE();
-      break;
-    case 96:
-      Cpu::RTS();
-      break;
-    case 97:
-      Cpu::ADC();
-      break;
-    case 98:
-      Cpu::STP();
-      break;
-    case 99:
-      Cpu::RRA();
-      break;
-    case 100:
-      Cpu::NOP();
-      break;
-    case 101:
-      Cpu::ADC();
-      break;
-    case 102:
-      Cpu::ROR();
-      break;
-    case 103:
-      Cpu::RRA();
-      break;
-    case 104:
-      Cpu::PLA();
-      break;
-    case 105:
-      Cpu::ADC();
-      break;
-    case 106:
-      Cpu::ROR();
-      break;
-    case 107:
-      Cpu::ARR();
-      break;
-    case 108:
-      Cpu::JMP();
-      break;
-    case 109:
-      Cpu::ADC();
-      break;
-    case 110:
-      Cpu::ROR();
-      break;
-    case 111:
-      Cpu::RRA();
-      break;
-    case 112:
-      Cpu::BVS();
-      break;
-    case 113:
-      Cpu::ADC();
-      break;
-    case 114:
-      Cpu::STP();
-      break;
-    case 115:
-      Cpu::RRA();
-      break;
-    case 116:
-      Cpu::NOP();
-      break;
-    case 117:
-      Cpu::ADC();
-      break;
-    case 118:
-      Cpu::ROR();
-      break;
-    case 119:
-      Cpu::RRA();
-      break;
-    case 120:
-      Cpu::SEI();
-      break;
-    case 121:
-      Cpu::ADC();
-      break;
-    case 122:
-      Cpu::NOP();
-      break;
-    case 123:
-      Cpu::RRA();
-      break;
-    case 124:
-      Cpu::NOP();
-      break;
-    case 125:
-      Cpu::ADC();
-      break;
-    case 126:
-      Cpu::ROR();
-      break;
-    case 127:
-      Cpu::RRA();
-      break;
-    case 128:
-      Cpu::NOP();
-      break;
-    case 129:
-      Cpu::STA();
-      break;
-    case 130:
-      Cpu::NOP();
-      break;
-    case 131:
-      Cpu::SAX();
-      break;
-    case 132:
-      Cpu::STY();
-      break;
-    case 133:
-      Cpu::STA();
-      break;
-    case 134:
-      Cpu::STX();
-      break;
-    case 135:
-      Cpu::SAX();
-      break;
-    case 136:
-      Cpu::DEY();
-      break;
-    case 137:
-      Cpu::NOP();
-      break;
-    case 138:
-      Cpu::TXA();
-      break;
-    case 139:
-      Cpu::XAA();
-      break;
-    case 140:
-      Cpu::STY();
-      break;
-    case 141:
-      Cpu::STA();
-      break;
-    case 142:
-      Cpu::STX();
-      break;
-    case 143:
-      Cpu::SAX();
-      break;
-    case 144:
-      Cpu::BCC();
-      break;
-    case 145:
-      Cpu::STA();
-      break;
-    case 146:
-      Cpu::STP();
-      break;
-    case 147:
-      Cpu::AHX();
-      break;
-    case 148:
-      Cpu::STY();
-      break;
-    case 149:
-      Cpu::STA();
-      break;
-    case 150:
-      Cpu::STX();
-      break;
-    case 151:
-      Cpu::SAX();
-      break;
-    case 152:
-      Cpu::TYA();
-      break;
-    case 153:
-      Cpu::STA();
-      break;
-    case 154:
-      Cpu::TXS();
-      break;
-    case 155:
-      Cpu::TAS();
-      break;
-    case 156:
-      Cpu::SHY();
-      break;
-    case 157:
-      Cpu::STA();
-      break;
-    case 158:
-      Cpu::SHX();
-      break;
-    case 159:
-      Cpu::AHX();
-      break;
-    case 160:
-      Cpu::LDY();
-      break;
-    case 161:
-      Cpu::LDA();
-      break;
-    case 162:
-      Cpu::LDX();
-      break;
-    case 163:
-      Cpu::LAX();
-      break;
-    case 164:
-      Cpu::LDY();
-      break;
-    case 165:
-      Cpu::LDA();
-      break;
-    case 166:
-      Cpu::LDX();
-      break;
-    case 167:
-      Cpu::LAX();
-      break;
-    case 168:
-      Cpu::TAY();
-      break;
-    case 169:
-      Cpu::LDA();
-      break;
-    case 170:
-      Cpu::TAX();
-      break;
-    case 171:
-      Cpu::LAX();
-      break;
-    case 172:
-      Cpu::LDY();
-      break;
-    case 173:
-      Cpu::LDA();
-      break;
-    case 174:
-      Cpu::LDX();
-      break;
-    case 175:
-      Cpu::LAX();
-      break;
-    case 176:
-      Cpu::BCS();
-      break;
-    case 177:
-      Cpu::LDA();
-      break;
-    case 178:
-      Cpu::STP();
-      break;
-    case 179:
-      Cpu::LAX();
-      break;
-    case 180:
-      Cpu::LDY();
-      break;
-    case 181:
-      Cpu::LDA();
-      break;
-    case 182:
-      Cpu::LDX();
-      break;
-    case 183:
-      Cpu::LAX();
-      break;
-    case 184:
-      Cpu::CLV();
-      break;
-    case 185:
-      Cpu::LDA();
-      break;
-    case 186:
-      Cpu::TSX();
-      break;
-    case 187:
-      Cpu::LAS();
-      break;
-    case 188:
-      Cpu::LDY();
-      break;
-    case 189:
-      Cpu::LDA();
-      break;
-    case 190:
-      Cpu::LDX();
-      break;
-    case 191:
-      Cpu::LAX();
-      break;
-    case 192:
-      Cpu::CPY();
-      break;
-    case 193:
-      Cpu::CMP();
-      break;
-    case 194:
-      Cpu::NOP();
-      break;
-    case 195:
-      Cpu::DCP();
-      break;
-    case 196:
-      Cpu::CPY();
-      break;
-    case 197:
-      Cpu::CMP();
-      break;
-    case 198:
-      Cpu::DEC();
-      break;
-    case 199:
-      Cpu::DCP();
-      break;
-    case 200:
-      Cpu::INY();
-      break;
-    case 201:
-      Cpu::CMP();
-      break;
-    case 202:
-      Cpu::DEX();
-      break;
-    case 203:
-      Cpu::AXS();
-      break;
-    case 204:
-      Cpu::CPY();
-      break;
-    case 205:
-      Cpu::CMP();
-      break;
-    case 206:
-      Cpu::DEC();
-      break;
-    case 207:
-      Cpu::DCP();
-      break;
-    case 208:
-      Cpu::BNE();
-      break;
-    case 209:
-      Cpu::CMP();
-      break;
-    case 210:
-      Cpu::STP();
-      break;
-    case 211:
-      Cpu::DCP();
-      break;
-    case 212:
-      Cpu::NOP();
-      break;
-    case 213:
-      Cpu::CMP();
-      break;
-    case 214:
-      Cpu::DEC();
-      break;
-    case 215:
-      Cpu::DCP();
-      break;
-    case 216:
-      Cpu::CLD();
-      break;
-    case 217:
-      Cpu::CMP();
-      break;
-    case 218:
-      Cpu::NOP();
-      break;
-    case 219:
-      Cpu::DCP();
-      break;
-    case 220:
-      Cpu::NOP();
-      break;
-    case 221:
-      Cpu::CMP();
-      break;
-    case 222:
-      Cpu::DEC();
-      break;
-    case 223:
-      Cpu::DCP();
-      break;
-    case 224:
-      Cpu::CPX();
-      break;
-    case 225:
-      Cpu::SBC();
-      break;
-    case 226:
-      Cpu::NOP();
-      break;
-    case 227:
-      Cpu::ISC();
-      break;
-    case 228:
-      Cpu::CPX();
-      break;
-    case 229:
-      Cpu::SBC();
-      break;
-    case 230:
-      Cpu::INC();
-      break;
-    case 231:
-      Cpu::ISC();
-      break;
-    case 232:
-      Cpu::INX();
-      break;
-    case 233:
-      Cpu::SBC();
-      break;
-    case 234:
-      Cpu::NOP();
-      break;
-    case 235:
-      Cpu::SBC();
-      break;
-    case 236:
-      Cpu::CPX();
-      break;
-    case 237:
-      Cpu::SBC();
-      break;
-    case 238:
-      Cpu::INC();
-      break;
-    case 239:
-      Cpu::ISC();
-      break;
-    case 240:
-      Cpu::BEQ();
-      break;
-    case 241:
-      Cpu::SBC();
-      break;
-    case 242:
-      Cpu::STP();
-      break;
-    case 243:
-      Cpu::ISC();
-      break;
-    case 244:
-      Cpu::NOP();
-      break;
-    case 245:
-      Cpu::SBC();
-      break;
-    case 246:
-      Cpu::INC();
-      break;
-    case 247:
-      Cpu::ISC();
-      break;
-    case 248:
-      Cpu::SED();
-      break;
-    case 249:
-      Cpu::SBC();
-      break;
-    case 250:
-      Cpu::NOP();
-      break;
-    case 251:
-      Cpu::ISC();
-      break;
-    case 252:
-      Cpu::NOP();
-      break;
-    case 253:
-      Cpu::SBC();
-      break;
-    case 254:
-      Cpu::INC();
-      break;
-    case 255:
-      Cpu::ISC();
-      break;
+    case 0x00: return BRK();
+    case 0x01: return ORA(IndexedIndirectX);
+    case 0x02: return STP();
+    case 0x03: return SLO(IndexedIndirectX);
+    case 0x04: return NOP(ZeroPage);
+    case 0x05: return ORA(ZeroPage);
+    case 0x06: return ASL(ZeroPage);
+    case 0x07: return SLO(ZeroPage);
+    case 0x08: return PHP();
+    case 0x09: return ORA();
+    case 0x0A: return ASL();
+    case 0x0B: return ANC();
+    case 0x0C: return NOP();
+    case 0x0D: return ORA();
+    case 0x0E: return ASL();
+    case 0x0F: return SLO();
+    case 0x10: return BPL();
+    case 0x11: return ORA();
+    case 0x12: return STP();
+    case 0x13: return SLO();
+    case 0x14: return NOP();
+    case 0x15: return ORA();
+    case 0x16: return ASL();
+    case 0x17: return SLO();
+    case 0x18: return CLC();
+    case 0x19: return ORA();
+    case 0x1A: return NOP();
+    case 0x1B: return SLO();
+    case 0x1C: return NOP();
+    case 0x1D: return ORA();
+    case 0x1E: return ASL();
+    case 0x1F: return SLO();
+    case 0x20: return JSR();
+    case 0x21: return AND(IndexedIndirectX);
+    case 0x22: return STP();
+    case 0x23: return RLA(IndexedIndirectX);
+    case 0x24: return BIT(ZeroPage);
+    case 0x25: return AND(ZeroPage);
+    case 0x26: return ROL(ZeroPage);
+    case 0x27: return RLA(ZeroPage);
+    case 0x28: return PLP();
+    case 0x29: return AND();
+    case 0x2A: return ROL();
+    case 0x2B: return ANC();
+    case 0x2C: return BIT();
+    case 0x2D: return AND();
+    case 0x2E: return ROL();
+    case 0x2F: return RLA();
+    case 0x30: return BMI();
+    case 0x31: return AND();
+    case 0x32: return STP();
+    case 0x33: return RLA();
+    case 0x34: return NOP();
+    case 0x35: return AND();
+    case 0x36: return ROL();
+    case 0x37: return RLA();
+    case 0x38: return SEC();
+    case 0x39: return AND();
+    case 0x3A: return NOP();
+    case 0x3B: return RLA();
+    case 0x3C: return NOP();
+    case 0x3D: return AND();
+    case 0x3E: return ROL();
+    case 0x3F: return RLA();
+    case 0x40: return RTI();
+    case 0x41: return EOR(IndexedIndirectX);
+    case 0x42: return STP();
+    case 0x43: return SRE(IndexedIndirectX);
+    case 0x44: return NOP(ZeroPage);
+    case 0x45: return EOR(ZeroPage);
+    case 0x46: return LSR(ZeroPage);
+    case 0x47: return SRE(ZeroPage);
+    case 0x48: return PHA();
+    case 0x49: return EOR();
+    case 0x4A: return LSR();
+    case 0x4B: return ALR();
+    case 0x4C: return JMP();
+    case 0x4D: return EOR();
+    case 0x4E: return LSR();
+    case 0x4F: return SRE();
+    case 0x50: return BVC();
+    case 0x51: return EOR();
+    case 0x52: return STP();
+    case 0x53: return SRE();
+    case 0x54: return NOP();
+    case 0x55: return EOR();
+    case 0x56: return LSR();
+    case 0x57: return SRE();
+    case 0x58: return CLI();
+    case 0x59: return EOR();
+    case 0x5A: return NOP();
+    case 0x5B: return SRE();
+    case 0x5C: return NOP();
+    case 0x5D: return EOR();
+    case 0x5E: return LSR();
+    case 0x5F: return SRE();
+    case 0x60: return RTS();
+    case 0x61: return ADC(IndexedIndirectX);
+    case 0x62: return STP();
+    case 0x63: return RRA(IndexedIndirectX);
+    case 0x64: return NOP(ZeroPage);
+    case 0x65: return ADC(ZeroPage);
+    case 0x66: return ROR(ZeroPage);
+    case 0x67: return RRA(ZeroPage);
+    case 0x68: return PLA();
+    case 0x69: return ADC();
+    case 0x6A: return ROR();
+    case 0x6B: return ARR();
+    case 0x6C: return JMP();
+    case 0x6D: return ADC();
+    case 0x6E: return ROR();
+    case 0x6F: return RRA();
+    case 0x70: return BVS();
+    case 0x71: return ADC();
+    case 0x72: return STP();
+    case 0x73: return RRA();
+    case 0x74: return NOP();
+    case 0x75: return ADC();
+    case 0x76: return ROR();
+    case 0x77: return RRA();
+    case 0x78: return SEI();
+    case 0x79: return ADC();
+    case 0x7A: return NOP();
+    case 0x7B: return RRA();
+    case 0x7C: return NOP();
+    case 0x7D: return ADC();
+    case 0x7E: return ROR();
+    case 0x7F: return RRA();
+    case 0x80: return NOP();
+    case 0x81: return STA(IndexedIndirectX);
+    case 0x82: return NOP();
+    case 0x83: return SAX(IndexedIndirectX);
+    case 0x84: return STY(ZeroPage);
+    case 0x85: return STA(ZeroPage);
+    case 0x86: return STX(ZeroPage);
+    case 0x87: return SAX(ZeroPage);
+    case 0x88: return DEY();
+    case 0x89: return NOP();
+    case 0x8A: return TXA();
+    case 0x8B: return XAA();
+    case 0x8C: return STY();
+    case 0x8D: return STA();
+    case 0x8E: return STX();
+    case 0x8F: return SAX();
+    case 0x90: return BCC();
+    case 0x91: return STA();
+    case 0x92: return STP();
+    case 0x93: return AHX();
+    case 0x94: return STY();
+    case 0x95: return STA();
+    case 0x96: return STX();
+    case 0x97: return SAX();
+    case 0x98: return TYA();
+    case 0x99: return STA();
+    case 0x9A: return TXS();
+    case 0x9B: return TAS();
+    case 0x9C: return SHY();
+    case 0x9D: return STA();
+    case 0x9E: return SHX();
+    case 0x9F: return AHX();
+    case 0xA0: return LDY();
+    case 0xA1: return LDA(IndexedIndirectX);
+    case 0xA2: return LDX();
+    case 0xA3: return LAX(IndexedIndirectX);
+    case 0xA4: return LDY(ZeroPage);
+    case 0xA5: return LDA(ZeroPage);
+    case 0xA6: return LDX(ZeroPage);
+    case 0xA7: return LAX(ZeroPage);
+    case 0xA8: return TAY();
+    case 0xA9: return LDA();
+    case 0xAA: return TAX();
+    case 0xAB: return LAX();
+    case 0xAC: return LDY();
+    case 0xAD: return LDA();
+    case 0xAE: return LDX();
+    case 0xAF: return LAX();
+    case 0xB0: return BCS();
+    case 0xB1: return LDA();
+    case 0xB2: return STP();
+    case 0xB3: return LAX();
+    case 0xB4: return LDY();
+    case 0xB5: return LDA();
+    case 0xB6: return LDX();
+    case 0xB7: return LAX();
+    case 0xB8: return CLV();
+    case 0xB9: return LDA();
+    case 0xBA: return TSX();
+    case 0xBB: return LAS();
+    case 0xBC: return LDY();
+    case 0xBD: return LDA();
+    case 0xBE: return LDX();
+    case 0xBF: return LAX();
+    case 0xC0: return CPY();
+    case 0xC1: return CMP(IndexedIndirectX);
+    case 0xC2: return NOP();
+    case 0xC3: return DCP(IndexedIndirectX);
+    case 0xC4: return CPY(ZeroPage);
+    case 0xC5: return CMP(ZeroPage);
+    case 0xC6: return DEC(ZeroPage);
+    case 0xC7: return DCP(ZeroPage);
+    case 0xC8: return INY();
+    case 0xC9: return CMP();
+    case 0xCA: return DEX();
+    case 0xCB: return AXS();
+    case 0xCC: return CPY();
+    case 0xCD: return CMP();
+    case 0xCE: return DEC();
+    case 0xCF: return DCP();
+    case 0xD0: return BNE();
+    case 0xD1: return CMP();
+    case 0xD2: return STP();
+    case 0xD3: return DCP();
+    case 0xD4: return NOP();
+    case 0xD5: return CMP();
+    case 0xD6: return DEC();
+    case 0xD7: return DCP();
+    case 0xD8: return CLD();
+    case 0xD9: return CMP();
+    case 0xDA: return NOP();
+    case 0xDB: return DCP();
+    case 0xDC: return NOP();
+    case 0xDD: return CMP();
+    case 0xDE: return DEC();
+    case 0xDF: return DCP();
+    case 0xE0: return CPX();
+    case 0xE1: return SBC(IndexedIndirectX);
+    case 0xE2: return NOP();
+    case 0xE3: return ISC(IndexedIndirectX);
+    case 0xE4: return CPX(ZeroPage);
+    case 0xE5: return SBC(ZeroPage);
+    case 0xE6: return INC(ZeroPage);
+    case 0xE7: return ISC(ZeroPage);
+    case 0xE8: return INX();
+    case 0xE9: return SBC();
+    case 0xEA: return NOP();
+    case 0xEB: return SBC();
+    case 0xEC: return CPX();
+    case 0xED: return SBC();
+    case 0xEE: return INC();
+    case 0xEF: return ISC();
+    case 0xF0: return BEQ();
+    case 0xF1: return SBC();
+    case 0xF2: return STP();
+    case 0xF3: return ISC();
+    case 0xF4: return NOP();
+    case 0xF5: return SBC();
+    case 0xF6: return INC();
+    case 0xF7: return ISC();
+    case 0xF8: return SED();
+    case 0xF9: return SBC();
+    case 0xFA: return NOP();
+    case 0xFB: return ISC();
+    case 0xFC: return NOP();
+    case 0xFD: return SBC();
+    case 0xFE: return INC();
+    case 0xFF: return ISC();
   }
 }
