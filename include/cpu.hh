@@ -47,6 +47,9 @@ class Cpu {
     Implicit           //
   };
 
+  uint8_t Pop();
+  void Push(uint8_t val);
+
   void ADC(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
   void AHX(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }
   void ALR(AddressingMode mode = Implicit) { spdlog::info("Mode: {0}", mode); }

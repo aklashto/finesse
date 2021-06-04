@@ -2,7 +2,7 @@
 
 #include <spdlog/spdlog.h>
 
-CpuMemory::CpuMemory(const std::vector<uint8_t>* prg_rom_data)
+CpuMemory::CpuMemory(const std::vector<uint8_t>& prg_rom_data)
     : prg_rom_data_(prg_rom_data) {
   ram_data_.fill(0);
   ppu_registers_.fill(0);
@@ -17,7 +17,7 @@ uint8_t CpuMemory::Read(const uint32_t address) {
   } else if (address < 0x4018) {  // APU and I/O register space
     return apu_io_registers_[address - 0x4000];
   } else if (address > 0x8000) {  // PRG ROM space
-    return prg_rom_data_->at(address - 0x8000);
+    return prg_rom_data_.at(address - 0x8000);
   } else {
     spdlog::error("Tried to read unimplemented address {0:4x} in CPU memory",
                   address);

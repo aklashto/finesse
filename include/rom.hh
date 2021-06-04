@@ -37,11 +37,11 @@ class Rom {
   // Mapper code used for memory mapping cartridge hardware
   const uint8_t mapper_;
   // Trainer Data
-  const std::vector<uint8_t>* trainer_data_;
+  const std::vector<uint8_t> trainer_data_;
   // PRG (program) ROM
-  const std::vector<uint8_t>* prg_rom_data_;
+  const std::vector<uint8_t> prg_rom_data_;
   // CHR (character) ROM
-  const std::vector<uint8_t>* chr_rom_data_;
+  const std::vector<uint8_t> chr_rom_data_;
   // All ROMs start with "NES^Z"
   static constexpr std::array<uint8_t, 4> header_prefix_chars_{0x4E, 0x45, 0x53,
                                                                0x1A};
@@ -60,9 +60,9 @@ class Rom {
   static size_t HeaderPrefixSize();
   static size_t NumFlagsInHeader();
   void PrintHeader();
-  const std::vector<uint8_t>* GetPrgRom();
-  const std::vector<uint8_t>* GetChrRom();
-  const std::vector<uint8_t>* GetTrainer();
+  const std::vector<uint8_t>& GetPrgRom();
+  const std::vector<uint8_t>& GetChrRom();
+  const std::vector<uint8_t>& GetTrainer();
 };
 
 #endif
