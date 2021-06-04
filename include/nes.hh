@@ -15,6 +15,8 @@ class Nes {
  public:
   Nes(Rom* rom);
   ~Nes();
+
+  void Run();
 };
 
 #endif

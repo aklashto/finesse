@@ -10,3 +10,5 @@ Nes::Nes(Rom* rom) {
 }
 
 Nes::~Nes() { delete cpu_; }
+
+void Nes::Run() { cpu_->Run(); }

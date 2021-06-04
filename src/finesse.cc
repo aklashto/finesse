@@ -140,6 +140,7 @@ int main(int argc, char** argv) {
     */
 
   Nes* nes = new Nes(rom);
+  nes->Run();
 
   delete nes;
   delete rom;

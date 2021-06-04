@@ -267,3 +267,5 @@ void Cpu::Exec(uint8_t opcode) {
     case 0xFF: return ISC(IndexedAbsoluteX);
   }
 }
+
+void Cpu::Run() { Exec(memory_->Read(PC)); }
