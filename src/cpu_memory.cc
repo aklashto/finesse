@@ -9,7 +9,7 @@ CpuMemory::CpuMemory(const std::vector<uint8_t>& prg_rom_data)
   apu_io_registers_.fill(0);
 }
 
-uint8_t CpuMemory::Read(const uint32_t address) {
+uint8_t CpuMemory::Read(const uint16_t address) {
   if (address < 0x2000) {  // 2 KB internal RAM + 3 mirrors
     return ram_data_[address % 0x0800];
   } else if (address < 0x4000) {  // PPU register space
@@ -25,7 +25,11 @@ uint8_t CpuMemory::Read(const uint32_t address) {
   }
 }
 
-void CpuMemory::Write(const uint32_t address, const uint8_t data) {
+uint16_t CpuMemory::ReadDoubleByte(const uint16_t address) {
+  return Read(address) | (uint16_t) (Read(address + 1) << 8);
+}
+
+void CpuMemory::Write(const uint16_t address, const uint8_t data) {
   if (address < 0x2000) {  // 2 KB internal RAM + 3 mirrors
     ram_data_[address % 0x0800] = data;
   } else if (address < 0x4000) {  // PPU register space

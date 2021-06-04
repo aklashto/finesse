@@ -1,7 +1,7 @@
 #include "cpu.hh"
 
 Cpu::Cpu(CpuMemory* memory) : memory_(memory), S(0xFF), A(0), X(0), Y(0) {
-  PC = memory->Read(0xFFFC);
+  PC = memory->ReadDoubleByte(0xFFFC);
   P.reset();
 }
 

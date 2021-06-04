@@ -17,8 +17,9 @@ class CpuMemory : public Memory {
  public:
   CpuMemory(const std::vector<uint8_t>& prg_rom_data);
   ~CpuMemory() {}
-  uint8_t Read(const uint32_t address);
-  void Write(const uint32_t address, const uint8_t data);
+  uint8_t Read(const uint16_t address);
+  uint16_t ReadDoubleByte(const uint16_t address);
+  void Write(const uint16_t address, const uint8_t data);
 };
 
 #endif
