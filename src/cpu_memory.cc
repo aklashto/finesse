@@ -26,7 +26,7 @@ uint8_t CpuMemory::Read(const uint16_t address) {
 }
 
 uint16_t CpuMemory::ReadDoubleByte(const uint16_t address) {
-  return Read(address) | (uint16_t) (Read(address + 1) << 8);
+  return Read(address) | ((uint16_t) Read(address + 1) << 8);
 }
 
 void CpuMemory::Write(const uint16_t address, const uint8_t data) {
