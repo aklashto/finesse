@@ -50,231 +50,81 @@ class Cpu {
   uint8_t Pop();
   void Push(uint8_t val);
 
-  void ADC(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void AHX(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void ALR(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void ANC(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void AND(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void ARR(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void ASL(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void AXS(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void BCC(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void BCS(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void BEQ(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void BIT(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void BMI(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void BNE(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void BPL(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void BRK(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void BVC(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void BVS(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void CLC(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void CLD(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void CLI(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void CLV(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void CMP(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void CPX(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void CPY(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void DCP(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void DEC(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void DEX(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void DEY(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void EOR(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void INC(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void INX(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void INY(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void ISC(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void JMP(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void JSR(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void LAS(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void LAX(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void LDA(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void LDX(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void LDY(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void LSR(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void NOP(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void ORA(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void PHA(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void PHP(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void PLA(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void PLP(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void RLA(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void ROL(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void ROR(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void RRA(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void RTI(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void RTS(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void SAX(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void SBC(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void SEC(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void SED(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void SEI(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void SHX(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void SHY(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void SLO(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void SRE(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void STA(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void STP(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void STX(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void STY(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void TAS(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void TAX(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void TAY(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void TSX(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void TXA(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void TXS(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void TYA(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
-  void XAA(AddressingMode mode = Implicit) {
-    spdlog::info("{0}:{1}", __FUNCTION__, mode);
-  }
+  void ADC(AddressingMode mode = Implicit);
+  void AHX(AddressingMode mode = Implicit);
+  void ALR(AddressingMode mode = Implicit);
+  void ANC(AddressingMode mode = Implicit);
+  void AND(AddressingMode mode = Implicit);
+  void ARR(AddressingMode mode = Implicit);
+  void ASL(AddressingMode mode = Implicit);
+  void AXS(AddressingMode mode = Implicit);
+  void BCC(AddressingMode mode = Implicit);
+  void BCS(AddressingMode mode = Implicit);
+  void BEQ(AddressingMode mode = Implicit);
+  void BIT(AddressingMode mode = Implicit);
+  void BMI(AddressingMode mode = Implicit);
+  void BNE(AddressingMode mode = Implicit);
+  void BPL(AddressingMode mode = Implicit);
+  void BRK(AddressingMode mode = Implicit);
+  void BVC(AddressingMode mode = Implicit);
+  void BVS(AddressingMode mode = Implicit);
+  void CLC(AddressingMode mode = Implicit);
+  void CLD(AddressingMode mode = Implicit);
+  void CLI(AddressingMode mode = Implicit);
+  void CLV(AddressingMode mode = Implicit);
+  void CMP(AddressingMode mode = Implicit);
+  void CPX(AddressingMode mode = Implicit);
+  void CPY(AddressingMode mode = Implicit);
+  void DCP(AddressingMode mode = Implicit);
+  void DEC(AddressingMode mode = Implicit);
+  void DEX(AddressingMode mode = Implicit);
+  void DEY(AddressingMode mode = Implicit);
+  void EOR(AddressingMode mode = Implicit);
+  void INC(AddressingMode mode = Implicit);
+  void INX(AddressingMode mode = Implicit);
+  void INY(AddressingMode mode = Implicit);
+  void ISC(AddressingMode mode = Implicit);
+  void JMP(AddressingMode mode = Implicit);
+  void JSR(AddressingMode mode = Implicit);
+  void LAS(AddressingMode mode = Implicit);
+  void LAX(AddressingMode mode = Implicit);
+  void LDA(AddressingMode mode = Implicit);
+  void LDX(AddressingMode mode = Implicit);
+  void LDY(AddressingMode mode = Implicit);
+  void LSR(AddressingMode mode = Implicit);
+  void NOP(AddressingMode mode = Implicit);
+  void ORA(AddressingMode mode = Implicit);
+  void PHA(AddressingMode mode = Implicit);
+  void PHP(AddressingMode mode = Implicit);
+  void PLA(AddressingMode mode = Implicit);
+  void PLP(AddressingMode mode = Implicit);
+  void RLA(AddressingMode mode = Implicit);
+  void ROL(AddressingMode mode = Implicit);
+  void ROR(AddressingMode mode = Implicit);
+  void RRA(AddressingMode mode = Implicit);
+  void RTI(AddressingMode mode = Implicit);
+  void RTS(AddressingMode mode = Implicit);
+  void SAX(AddressingMode mode = Implicit);
+  void SBC(AddressingMode mode = Implicit);
+  void SEC(AddressingMode mode = Implicit);
+  void SED(AddressingMode mode = Implicit);
+  void SEI(AddressingMode mode = Implicit);
+  void SHX(AddressingMode mode = Implicit);
+  void SHY(AddressingMode mode = Implicit);
+  void SLO(AddressingMode mode = Implicit);
+  void SRE(AddressingMode mode = Implicit);
+  void STA(AddressingMode mode = Implicit);
+  void STP(AddressingMode mode = Implicit);
+  void STX(AddressingMode mode = Implicit);
+  void STY(AddressingMode mode = Implicit);
+  void TAS(AddressingMode mode = Implicit);
+  void TAX(AddressingMode mode = Implicit);
+  void TAY(AddressingMode mode = Implicit);
+  void TSX(AddressingMode mode = Implicit);
+  void TXA(AddressingMode mode = Implicit);
+  void TXS(AddressingMode mode = Implicit);
+  void TYA(AddressingMode mode = Implicit);
+  void XAA(AddressingMode mode = Implicit);
 
   void Exec(uint8_t opcode);
 
