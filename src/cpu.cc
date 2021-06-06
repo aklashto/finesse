@@ -7,7 +7,15 @@ Cpu::Cpu(CpuMemory* memory) : memory_(memory), S(0xFF), A(0), X(0), Y(0) {
 
 Cpu::~Cpu() { delete memory_; }
 
-void Cpu::Exec(uint8_t opcode) {
+void Cpu::ResetStatusFlag(const StatusFlag flag) {
+  P[flag] = 0;
+}
+
+void Cpu::SetStatusFlag(const StatusFlag flag) {
+  P[flag] = 1;
+}
+
+void Cpu::Exec(const uint8_t opcode) {
   switch (opcode) {
     case 0x00: return BRK();
     case 0x01: return ORA(IndexedIndirectX);
@@ -274,228 +282,229 @@ void Cpu::Run() {
   }
 }
 
-void Cpu::ADC(AddressingMode mode) {
+void Cpu::ADC(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::AHX(AddressingMode mode) {
+void Cpu::AHX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::ALR(AddressingMode mode) {
+void Cpu::ALR(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::ANC(AddressingMode mode) {
+void Cpu::ANC(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::AND(AddressingMode mode) {
+void Cpu::AND(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::ARR(AddressingMode mode) {
+void Cpu::ARR(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::ASL(AddressingMode mode) {
+void Cpu::ASL(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::AXS(AddressingMode mode) {
+void Cpu::AXS(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::BCC(AddressingMode mode) {
+void Cpu::BCC(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::BCS(AddressingMode mode) {
+void Cpu::BCS(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::BEQ(AddressingMode mode) {
+void Cpu::BEQ(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::BIT(AddressingMode mode) {
+void Cpu::BIT(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::BMI(AddressingMode mode) {
+void Cpu::BMI(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::BNE(AddressingMode mode) {
+void Cpu::BNE(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::BPL(AddressingMode mode) {
+void Cpu::BPL(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::BRK(AddressingMode mode) {
+void Cpu::BRK(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::BVC(AddressingMode mode) {
+void Cpu::BVC(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::BVS(AddressingMode mode) {
+void Cpu::BVS(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::CLC(AddressingMode mode) {
+void Cpu::CLC(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::CLD(AddressingMode mode) {
+void Cpu::CLD(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::CLI(AddressingMode mode) {
+void Cpu::CLI(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::CLV(AddressingMode mode) {
+void Cpu::CLV(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::CMP(AddressingMode mode) {
+void Cpu::CMP(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::CPX(AddressingMode mode) {
+void Cpu::CPX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::CPY(AddressingMode mode) {
+void Cpu::CPY(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::DCP(AddressingMode mode) {
+void Cpu::DCP(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::DEC(AddressingMode mode) {
+void Cpu::DEC(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::DEX(AddressingMode mode) {
+void Cpu::DEX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::DEY(AddressingMode mode) {
+void Cpu::DEY(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::EOR(AddressingMode mode) {
+void Cpu::EOR(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::INC(AddressingMode mode) {
+void Cpu::INC(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::INX(AddressingMode mode) {
+void Cpu::INX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::INY(AddressingMode mode) {
+void Cpu::INY(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::ISC(AddressingMode mode) {
+void Cpu::ISC(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::JMP(AddressingMode mode) {
+void Cpu::JMP(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::JSR(AddressingMode mode) {
+void Cpu::JSR(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::LAS(AddressingMode mode) {
+void Cpu::LAS(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::LAX(AddressingMode mode) {
+void Cpu::LAX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::LDA(AddressingMode mode) {
+void Cpu::LDA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::LDX(AddressingMode mode) {
+void Cpu::LDX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::LDY(AddressingMode mode) {
+void Cpu::LDY(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::LSR(AddressingMode mode) {
+void Cpu::LSR(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::NOP(AddressingMode mode) {
+void Cpu::NOP(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::ORA(AddressingMode mode) {
+void Cpu::ORA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::PHA(AddressingMode mode) {
+void Cpu::PHA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::PHP(AddressingMode mode) {
+void Cpu::PHP(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::PLA(AddressingMode mode) {
+void Cpu::PLA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::PLP(AddressingMode mode) {
+void Cpu::PLP(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::RLA(AddressingMode mode) {
+void Cpu::RLA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::ROL(AddressingMode mode) {
+void Cpu::ROL(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::ROR(AddressingMode mode) {
+void Cpu::ROR(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::RRA(AddressingMode mode) {
+void Cpu::RRA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::RTI(AddressingMode mode) {
+void Cpu::RTI(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::RTS(AddressingMode mode) {
+void Cpu::RTS(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::SAX(AddressingMode mode) {
+void Cpu::SAX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::SBC(AddressingMode mode) {
+void Cpu::SBC(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::SEC(AddressingMode mode) {
+void Cpu::SEC(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::SED(AddressingMode mode) {
+void Cpu::SED(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::SEI(AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+void Cpu::SEI(const AddressingMode mode) {
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
 }
-void Cpu::SHX(AddressingMode mode) {
+void Cpu::SHX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::SHY(AddressingMode mode) {
+void Cpu::SHY(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::SLO(AddressingMode mode) {
+void Cpu::SLO(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::SRE(AddressingMode mode) {
+void Cpu::SRE(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::STA(AddressingMode mode) {
+void Cpu::STA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::STP(AddressingMode mode) {
+void Cpu::STP(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::STX(AddressingMode mode) {
+void Cpu::STX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::STY(AddressingMode mode) {
+void Cpu::STY(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::TAS(AddressingMode mode) {
+void Cpu::TAS(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::TAX(AddressingMode mode) {
+void Cpu::TAX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::TAY(AddressingMode mode) {
+void Cpu::TAY(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::TSX(AddressingMode mode) {
+void Cpu::TSX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::TXA(AddressingMode mode) {
+void Cpu::TXA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::TXS(AddressingMode mode) {
+void Cpu::TXS(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::TYA(AddressingMode mode) {
+void Cpu::TYA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
-void Cpu::XAA(AddressingMode mode) {
+void Cpu::XAA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
