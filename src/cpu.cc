@@ -7,13 +7,9 @@ Cpu::Cpu(CpuMemory* memory) : memory_(memory), S(0xFF), A(0), X(0), Y(0) {
 
 Cpu::~Cpu() { delete memory_; }
 
-void Cpu::ResetStatusFlag(const StatusFlag flag) {
-  P[flag] = 0;
-}
+void Cpu::ResetStatusFlag(const StatusFlag flag) { P[flag] = 0; }
 
-void Cpu::SetStatusFlag(const StatusFlag flag) {
-  P[flag] = 1;
-}
+void Cpu::SetStatusFlag(const StatusFlag flag) { P[flag] = 1; }
 
 void Cpu::Exec(const uint8_t opcode) {
   switch (opcode) {
@@ -340,7 +336,10 @@ void Cpu::CLC(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::CLD(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
+
+  ResetStatusFlag(Decimal);
 }
 void Cpu::CLI(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
@@ -459,6 +458,8 @@ void Cpu::SED(const AddressingMode mode) {
 void Cpu::SEI(const AddressingMode mode) {
   spdlog::info("{0}", __FUNCTION__);
   assert(mode == Implicit);
+
+  SetStatusFlag(InterruptDisable);
 }
 void Cpu::SHX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
