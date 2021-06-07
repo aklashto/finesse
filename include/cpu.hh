@@ -47,13 +47,17 @@ class Cpu {
     Implicit           //
   };
 
+  // Stack operations
   uint8_t Pop();
   void Push(const uint8_t val);
+
+  // Status flag operations
   void ResetStatusFlag(const StatusFlag flag);
   void SetStatusFlag(const StatusFlag flag);
   void SetFlagZ(const uint8_t val);
   void SetFlagN(const uint8_t val);
 
+  // CPU instructions
   void ADC(const AddressingMode mode = Implicit);
   void AHX(const AddressingMode mode = Implicit);
   void ALR(const AddressingMode mode = Implicit);
@@ -131,6 +135,7 @@ class Cpu {
   void XAA(const AddressingMode mode = Implicit);
 
   void Exec(const uint8_t opcode);
+  uint16_t ExecuteAddressingMode(const AddressingMode mode);
 
  public:
   Cpu(CpuMemory* memory);

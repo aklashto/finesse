@@ -288,6 +288,28 @@ void Cpu::Exec(const uint8_t opcode) {
   }
 }
 
+uint16_t Cpu::ExecuteAddressingMode(const AddressingMode mode) {
+  assert(mode != Implicit);
+
+  switch (mode) {
+    case IndexedZeroPageX: return (X + memory_->Read(++PC)) & 0xFF;
+    case IndexedZeroPageY: return (Y + memory_->Read(++PC)) & 0xFF;
+    case IndexedAbsoluteX: return X + memory_->ReadDoubleByte(++PC);
+    case IndexedAbsoluteY: return Y + memory_->ReadDoubleByte(++PC);
+    // case IndexedIndirectX:
+    // case IndexedIndirectY:
+    // case Accumulator:
+    case Immediate: return ++PC;
+    case ZeroPage: return memory_->Read(++PC);
+    case Absolute: return memory_->ReadDoubleByte(++PC);
+    // case Relative:
+    case Indirect:
+      return memory_->ReadDoubleByte(memory_->ReadDoubleByte(++PC));
+    // case Implicit:
+    default: return 0;
+  }
+}
+
 void Cpu::Run() {
   for (;; ++PC) {
     Exec(memory_->Read(PC));
@@ -419,7 +441,7 @@ void Cpu::LDX(const AddressingMode mode) {
   assert(mode == Immediate || mode == ZeroPage || mode == IndexedZeroPageY ||
          mode == Absolute || mode == IndexedAbsoluteY);
 
-  X = memory_->Read(++PC);
+  X = memory_->Read(ExecuteAddressingMode(mode));
   SetFlagZ(X);
   SetFlagN(X);
 }
