@@ -434,7 +434,15 @@ void Cpu::LAX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::LDA(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Immediate || mode == ZeroPage || mode == IndexedZeroPageX ||
+         mode == Absolute || mode == IndexedAbsoluteX ||
+         mode == IndexedAbsoluteY || mode == IndexedIndirectX ||
+         mode == IndexedIndirectY);
+
+  A = memory_->Read(ExecuteAddressingMode(mode));
+  SetFlagZ(A);
+  SetFlagN(A);
 }
 void Cpu::LDX(const AddressingMode mode) {
   spdlog::info("{0}", __FUNCTION__);
@@ -446,7 +454,13 @@ void Cpu::LDX(const AddressingMode mode) {
   SetFlagN(X);
 }
 void Cpu::LDY(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Immediate || mode == ZeroPage || mode == IndexedZeroPageX ||
+         mode == Absolute || mode == IndexedAbsoluteX);
+
+  Y = memory_->Read(ExecuteAddressingMode(mode));
+  SetFlagZ(Y);
+  SetFlagN(Y);
 }
 void Cpu::LSR(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
@@ -545,7 +559,9 @@ void Cpu::TXA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::TXS(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
+  S = X;
 }
 void Cpu::TYA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
