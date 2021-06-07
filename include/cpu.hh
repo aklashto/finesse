@@ -51,6 +51,8 @@ class Cpu {
   void Push(const uint8_t val);
   void ResetStatusFlag(const StatusFlag flag);
   void SetStatusFlag(const StatusFlag flag);
+  void SetFlagZ(const uint8_t val);
+  void SetFlagN(const uint8_t val);
 
   void ADC(const AddressingMode mode = Implicit);
   void AHX(const AddressingMode mode = Implicit);

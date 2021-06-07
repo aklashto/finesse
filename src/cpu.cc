@@ -11,6 +11,22 @@ void Cpu::ResetStatusFlag(const StatusFlag flag) { P[flag] = 0; }
 
 void Cpu::SetStatusFlag(const StatusFlag flag) { P[flag] = 1; }
 
+void Cpu::SetFlagZ(const uint8_t val) {
+  if (val == 0) {
+    P[Zero] = 1;
+  } else {
+    P[Zero] = 0;
+  }
+}
+
+void Cpu::SetFlagN(const uint8_t val) {
+  if (val >> 7 == 1) {
+    P[Negative] = 1;
+  } else {
+    P[Negative] = 0;
+  }
+}
+
 void Cpu::Exec(const uint8_t opcode) {
   switch (opcode) {
     case 0x00: return BRK();
@@ -399,7 +415,13 @@ void Cpu::LDA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::LDX(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Immediate || mode == ZeroPage || mode == IndexedZeroPageY ||
+         mode == Absolute || mode == IndexedAbsoluteY);
+
+  X = memory_->Read(++PC);
+  SetFlagZ(X);
+  SetFlagN(X);
 }
 void Cpu::LDY(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
