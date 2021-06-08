@@ -22,6 +22,7 @@ deps += dependency('gtkmm-3.0')
 
 subdir('include')
 subdir('src')
+subdir('tests')
 
 finesse_bin = executable('finesse',
   src,
