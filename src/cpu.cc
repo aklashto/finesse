@@ -386,7 +386,21 @@ void Cpu::CLV(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::CMP(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}:{1}", __FUNCTION__);
+  assert(mode == Immediate || mode == ZeroPage || mode == IndexedZeroPageX ||
+         mode == Absolute || mode == IndexedAbsoluteX ||
+         mode == IndexedAbsoluteY || mode == IndexedIndirectX ||
+         mode == IndexedIndirectY);
+
+  uint8_t M = memory_->Read(ExecuteAddressingMode(mode));
+  uint8_t val = A - M;
+  SetFlagN(val);
+  SetFlagZ(val);
+  if (A >= M) {
+    P[Carry] = 1;
+  } else {
+    P[Carry] = 0;
+  }
 }
 void Cpu::CPX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
