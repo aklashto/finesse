@@ -361,7 +361,28 @@ void Cpu::ARR(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::ASL(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}:{1}", __FUNCTION__);
+
+  uint8_t addr = ExecuteAddressingMode(mode);
+  uint8_t M = memory_->Read(addr);
+  uint8_t val;
+
+  if (mode == Accumulator) {
+    val = A;
+    A = val * 2;
+  } else {
+    val = M;
+    memory_->Write(addr, val * 2);
+  }
+
+  if (val >> 7 == 1) {
+    SetStatusFlag(Carry);
+  } else {
+    ResetStatusFlag(Carry);
+  }
+
+  SetFlagN(val);
+  SetFlagZ(val);
 }
 void Cpu::AXS(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
