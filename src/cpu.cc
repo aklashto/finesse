@@ -317,7 +317,29 @@ void Cpu::Run() {
 }
 
 void Cpu::ADC(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}:{1}", __FUNCTION__);
+  uint8_t M = memory_->Read(ExecuteAddressingMode(mode));
+  uint16_t val = A + M + P[Carry];
+
+  if (val > 0xFF) {
+    SetStatusFlag(Carry);
+  } else {
+    ResetStatusFlag(Carry);
+  }
+
+  // Overflow means the inputs are the same sign and the result is a different
+  // sign, so we compare the MSB which is the sign bit in 2s complement
+  if (((A ^ M) >> 7) == 0 && (((A ^ val) >> 7) & 1) == 1) {
+    SetStatusFlag(Overflow);
+  } else {
+    ResetStatusFlag(Overflow);
+  }
+
+  // Implicit cast from 16-bit to 8-bit to get truncated value
+  A = val;
+
+  SetFlagN(A);
+  SetFlagZ(A);
 }
 void Cpu::AHX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
@@ -329,7 +351,11 @@ void Cpu::ANC(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::AND(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}:{1}", __FUNCTION__);
+
+  A &= memory_->Read(ExecuteAddressingMode(mode));
+  SetFlagN(A);
+  SetFlagZ(A);
 }
 void Cpu::ARR(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
@@ -397,9 +423,9 @@ void Cpu::CMP(const AddressingMode mode) {
   SetFlagN(val);
   SetFlagZ(val);
   if (A >= M) {
-    P[Carry] = 1;
+    SetStatusFlag(Carry);
   } else {
-    P[Carry] = 0;
+    ResetStatusFlag(Carry);
   }
 }
 void Cpu::CPX(const AddressingMode mode) {
