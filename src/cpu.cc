@@ -302,7 +302,10 @@ uint16_t Cpu::ExecuteAddressingMode(const AddressingMode mode) {
     case Immediate: return ++PC;
     case ZeroPage: return memory_->Read(++PC);
     case Absolute: return memory_->ReadDoubleByte(++PC);
-    // case Relative:
+    case Relative: {
+      int8_t offset = (int8_t)(memory_->Read(++PC));
+      return (++PC) + offset;
+    }
     case Indirect:
       return memory_->ReadDoubleByte(memory_->ReadDoubleByte(++PC));
     // case Implicit:
@@ -317,7 +320,7 @@ void Cpu::Run() {
 }
 
 void Cpu::ADC(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__);
+  spdlog::info("{0}", __FUNCTION__);
   uint8_t M = memory_->Read(ExecuteAddressingMode(mode));
   uint16_t val = A + M + P[Carry];
 
@@ -351,7 +354,7 @@ void Cpu::ANC(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::AND(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__);
+  spdlog::info("{0}", __FUNCTION__);
 
   A &= memory_->Read(ExecuteAddressingMode(mode));
   SetFlagN(A);
@@ -361,7 +364,7 @@ void Cpu::ARR(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::ASL(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__);
+  spdlog::info("{0}", __FUNCTION__);
 
   uint8_t addr = ExecuteAddressingMode(mode);
   uint8_t M = memory_->Read(addr);
@@ -388,10 +391,16 @@ void Cpu::AXS(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::BCC(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  if (!P[Carry]) {
+    PC = ExecuteAddressingMode(mode);
+  }
 }
 void Cpu::BCS(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  if (P[Carry]) {
+    PC = ExecuteAddressingMode(mode);
+  }
 }
 void Cpu::BEQ(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
@@ -433,7 +442,7 @@ void Cpu::CLV(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::CMP(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__);
+  spdlog::info("{0}", __FUNCTION__);
   assert(mode == Immediate || mode == ZeroPage || mode == IndexedZeroPageX ||
          mode == Absolute || mode == IndexedAbsoluteX ||
          mode == IndexedAbsoluteY || mode == IndexedIndirectX ||
