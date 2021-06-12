@@ -27,6 +27,7 @@ class Cpu {
     Zero = 1,
     InterruptDisable = 2,
     Decimal = 3,
+    Break = 4,
     Overflow = 6,
     Negative = 7
   };
