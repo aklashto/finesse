@@ -304,7 +304,8 @@ uint16_t Cpu::ExecuteAddressingMode(const AddressingMode mode) {
     case Absolute: return memory_->ReadDoubleByte(++PC);
     case Relative: {
       int8_t offset = (int8_t)(memory_->Read(++PC));
-      return (++PC) + offset;
+      // return (++PC) + offset;
+      return PC + offset;
     }
     case Indirect:
       return memory_->ReadDoubleByte(memory_->ReadDoubleByte(++PC));
@@ -403,19 +404,36 @@ void Cpu::BCS(const AddressingMode mode) {
   }
 }
 void Cpu::BEQ(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  if (P[Zero]) {
+    PC = ExecuteAddressingMode(mode);
+  }
 }
 void Cpu::BIT(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  uint8_t M = memory_->Read(ExecuteAddressingMode(mode));
+
+  SetFlagZ(A & M);
+  P[Overflow] = (M >> 5) & 1;
+  P[Negative] = (M >> 6) & 1;
 }
 void Cpu::BMI(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  if (P[Negative]) {
+    PC = ExecuteAddressingMode(mode);
+  }
 }
 void Cpu::BNE(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  if (!P[Zero]) {
+    PC = ExecuteAddressingMode(mode);
+  }
 }
 void Cpu::BPL(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  if (!P[Negative]) {
+    PC = ExecuteAddressingMode(mode);
+  }
 }
 void Cpu::BRK(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
