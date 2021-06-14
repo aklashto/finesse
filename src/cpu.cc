@@ -7,7 +7,7 @@ Cpu::Cpu(CpuMemory* memory) : memory_(memory), S(0xFF), A(0), X(0), Y(0) {
 
 Cpu::~Cpu() { delete memory_; }
 
-uint8_t Cpu::Pop() {
+uint8_t Cpu::Pull() {
   uint16_t addr = 0x100 | (uint16_t)(S++);
   return memory_->Read(addr);
 }
@@ -695,19 +695,44 @@ void Cpu::NOP(const AddressingMode mode) {
   assert(mode == Implicit);
 }
 void Cpu::ORA(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Immediate || mode == ZeroPage || mode == IndexedZeroPageX ||
+         mode == Absolute || mode == IndexedAbsoluteX ||
+         mode == IndexedAbsoluteY || mode == IndexedIndirectX ||
+         mode == IndexedIndirectY);
+
+  A |= memory_->Read(ExecuteAddressingMode(mode));
+  SetFlagN(A);
+  SetFlagZ(A);
 }
 void Cpu::PHA(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
+
+  Push(A);
 }
 void Cpu::PHP(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
+
+  std::bitset<8> status = P;
+
+  // 6502 bug
+  status[Break] = 1;
+
+  Push(status.to_ulong());
 }
 void Cpu::PLA(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
+
+  A = Pull();
 }
 void Cpu::PLP(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
+
+  P = Pull();
 }
 void Cpu::RLA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);

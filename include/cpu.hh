@@ -49,7 +49,7 @@ class Cpu {
   };
 
   // Stack operations
-  uint8_t Pop();
+  uint8_t Pull();
   void Push(const uint8_t val);
 
   // Status flag operations
