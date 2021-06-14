@@ -53,8 +53,7 @@ class Cpu {
   void Push(const uint8_t val);
 
   // Status flag operations
-  void ResetStatusFlag(const StatusFlag flag);
-  void SetStatusFlag(const StatusFlag flag);
+  void SetStatusFlag(const StatusFlag flag, const bool condition);
   void SetFlagZ(const uint8_t val);
   void SetFlagN(const uint8_t val);
 
