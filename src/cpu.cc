@@ -318,6 +318,23 @@ uint16_t Cpu::ExecuteAddressingMode(const AddressingMode mode) {
   }
 }
 
+void Cpu::PerformAdd(const uint8_t val) {
+  uint16_t result = A + val + P[Carry];
+
+  SetStatusFlag(Carry, result > 0xFF);
+
+  // Overflow means the inputs are the same sign and the result is a different
+  // sign, so we compare the MSB which is the sign bit in 2s complement
+  SetStatusFlag(Overflow,
+                ((A ^ val) >> 7) == 0 && (((A ^ result) >> 7) & 1) == 1);
+
+  // Implicit cast from 16-bit to 8-bit to get truncated value
+  A = result;
+
+  SetFlagN(A);
+  SetFlagZ(A);
+}
+
 void Cpu::Run() {
   for (;; ++PC) {
     Exec(memory_->Read(PC));
@@ -332,19 +349,7 @@ void Cpu::ADC(const AddressingMode mode) {
          mode == IndexedIndirectY);
 
   uint8_t M = memory_->Read(ExecuteAddressingMode(mode));
-  uint16_t val = A + M + P[Carry];
-
-  SetStatusFlag(Carry, val > 0xFF);
-
-  // Overflow means the inputs are the same sign and the result is a different
-  // sign, so we compare the MSB which is the sign bit in 2s complement
-  SetStatusFlag(Overflow, ((A ^ M) >> 7) == 0 && (((A ^ val) >> 7) & 1) == 1);
-
-  // Implicit cast from 16-bit to 8-bit to get truncated value
-  A = val;
-
-  SetFlagN(A);
-  SetFlagZ(A);
+  PerformAdd(M);
 }
 void Cpu::AHX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
@@ -822,19 +827,7 @@ void Cpu::SBC(const AddressingMode mode) {
          mode == IndexedIndirectY);
 
   uint8_t M = memory_->Read(ExecuteAddressingMode(mode));
-  uint16_t val = A + (M ^ 0xFF) + P[Carry];
-
-  SetStatusFlag(Carry, val > 0xFF);
-
-  // Overflow means the inputs are the same sign and the result is a different
-  // sign, so we compare the MSB which is the sign bit in 2s complement
-  SetStatusFlag(Overflow, ((A ^ M) >> 7) == 0 && (((A ^ val) >> 7) & 1) == 1);
-
-  // Implicit cast from 16-bit to 8-bit to get truncated value
-  A = val;
-
-  SetFlagN(A);
-  SetFlagZ(A);
+  PerformAdd(M ^ 0xFF);
 }
 void Cpu::SEC(const AddressingMode mode) {
   spdlog::info("{0}", __FUNCTION__);

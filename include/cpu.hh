@@ -57,6 +57,10 @@ class Cpu {
   void SetFlagZ(const uint8_t val);
   void SetFlagN(const uint8_t val);
 
+  // Instruction helper methods
+  uint16_t ExecuteAddressingMode(const AddressingMode mode);
+  void PerformAdd(const uint8_t val);
+
   // CPU instructions
   void ADC(const AddressingMode mode = Implicit);
   void AHX(const AddressingMode mode = Implicit);
@@ -135,7 +139,6 @@ class Cpu {
   void XAA(const AddressingMode mode = Implicit);
 
   void Exec(const uint8_t opcode);
-  uint16_t ExecuteAddressingMode(const AddressingMode mode);
 
  public:
   Cpu(CpuMemory* memory);
