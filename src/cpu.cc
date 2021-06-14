@@ -738,19 +738,78 @@ void Cpu::RLA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::ROL(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Accumulator || mode == ZeroPage || mode == IndexedZeroPageX ||
+         mode == Absolute || mode == IndexedAbsoluteX);
+
+  uint8_t val;
+  bool old_carry;
+
+  if (mode == Accumulator) {
+    old_carry = (A >> 7) & 1;
+    A <<= 1;
+    A |= P[Carry];
+    val = A;
+  } else {
+    uint16_t addr = ExecuteAddressingMode(mode);
+
+    uint8_t M = memory_->Read(addr);
+    old_carry = (M >> 7) & 1;
+    M <<= 1;
+    M |= P[Carry];
+    val = M;
+    memory_->Write(addr, M);
+  }
+
+  SetStatusFlag(Carry, old_carry);
+  SetFlagN(val);
+  SetFlagZ(val);
 }
 void Cpu::ROR(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Accumulator || mode == ZeroPage || mode == IndexedZeroPageX ||
+         mode == Absolute || mode == IndexedAbsoluteX);
+
+  uint8_t val;
+  bool old_carry;
+
+  if (mode == Accumulator) {
+    old_carry = A & 1;
+    A >>= 1;
+    A |= P[Carry] << 7;
+    val = A;
+  } else {
+    uint16_t addr = ExecuteAddressingMode(mode);
+
+    uint8_t M = memory_->Read(addr);
+    old_carry = M & 1;
+    M >>= 1;
+    M |= P[Carry] << 7;
+    val = M;
+    memory_->Write(addr, M);
+  }
+
+  SetStatusFlag(Carry, old_carry);
+  SetFlagN(val);
+  SetFlagZ(val);
 }
 void Cpu::RRA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::RTI(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
+
+  P = Pull();
+  PC = Pull();
+  PC |= Pull() << 8;
 }
 void Cpu::RTS(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
+
+  PC = Pull();
+  PC |= Pull() << 8;
 }
 void Cpu::SAX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
