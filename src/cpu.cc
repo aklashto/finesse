@@ -815,13 +815,38 @@ void Cpu::SAX(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::SBC(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Immediate || mode == ZeroPage || mode == IndexedZeroPageX ||
+         mode == Absolute || mode == IndexedAbsoluteX ||
+         mode == IndexedAbsoluteY || mode == IndexedIndirectX ||
+         mode == IndexedIndirectY);
+
+  uint8_t M = memory_->Read(ExecuteAddressingMode(mode));
+  uint16_t val = A + (M ^ 0xFF) + P[Carry];
+
+  SetStatusFlag(Carry, val > 0xFF);
+
+  // Overflow means the inputs are the same sign and the result is a different
+  // sign, so we compare the MSB which is the sign bit in 2s complement
+  SetStatusFlag(Overflow, ((A ^ M) >> 7) == 0 && (((A ^ val) >> 7) & 1) == 1);
+
+  // Implicit cast from 16-bit to 8-bit to get truncated value
+  A = val;
+
+  SetFlagN(A);
+  SetFlagZ(A);
 }
 void Cpu::SEC(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
+
+  SetStatusFlag(Carry, true);
 }
 void Cpu::SED(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
+
+  SetStatusFlag(Decimal, true);
 }
 void Cpu::SEI(const AddressingMode mode) {
   spdlog::info("{0}", __FUNCTION__);
@@ -842,31 +867,62 @@ void Cpu::SRE(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::STA(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == ZeroPage || mode == IndexedZeroPageX || mode == Absolute ||
+         mode == IndexedAbsoluteX || mode == IndexedAbsoluteY ||
+         mode == IndexedIndirectX || mode == IndexedIndirectY);
+
+  memory_->Write(ExecuteAddressingMode(mode), A);
 }
 void Cpu::STP(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::STX(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == ZeroPage || mode == IndexedZeroPageY || mode == Absolute);
+
+  memory_->Write(ExecuteAddressingMode(mode), X);
 }
 void Cpu::STY(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == ZeroPage || mode == IndexedZeroPageX || mode == Absolute);
+
+  memory_->Write(ExecuteAddressingMode(mode), X);
 }
 void Cpu::TAS(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
 }
 void Cpu::TAX(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
+
+  X = A;
+  SetFlagN(X);
+  SetFlagZ(X);
 }
 void Cpu::TAY(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
+
+  Y = A;
+  SetFlagN(Y);
+  SetFlagZ(Y);
 }
 void Cpu::TSX(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
+
+  X = S;
+  SetFlagN(X);
+  SetFlagZ(X);
 }
 void Cpu::TXA(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
+
+  A = X;
+  SetFlagN(A);
+  SetFlagZ(A);
 }
 void Cpu::TXS(const AddressingMode mode) {
   spdlog::info("{0}", __FUNCTION__);
@@ -874,7 +930,12 @@ void Cpu::TXS(const AddressingMode mode) {
   S = X;
 }
 void Cpu::TYA(const AddressingMode mode) {
-  spdlog::info("{0}:{1}", __FUNCTION__, mode);
+  spdlog::info("{0}", __FUNCTION__);
+  assert(mode == Implicit);
+
+  A = Y;
+  SetFlagN(A);
+  SetFlagZ(A);
 }
 void Cpu::XAA(const AddressingMode mode) {
   spdlog::info("{0}:{1}", __FUNCTION__, mode);
